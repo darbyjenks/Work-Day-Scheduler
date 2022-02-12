@@ -1,56 +1,94 @@
-// var date= moment().format('MMMM Do YYYY, h:mm:ss a');
-// let plannerEl = $('#planner');
-let containerEl =$('.container');
-let rowEl =$('.row');
-let hoursEl =$('#hours');
-// let apptEl =$('#appts');
-// let saveEl =$('#save');
+let containerEl = $('.appointments');
+let rowEl = $('.row');
+let hoursEl = $('#hours');
 
-let hours = [
-    '9AM',
-    '10AM',
-    '11AM',
-    '12PM',
-    '1PM',
-    '2PM',
-    '3PM',
-    '4PM',
-    '5PM',
-];
-
-
-hours.forEach(hour => {
-    console.log(`Hour: ${hour}`);
-    hoursEl.append(hour);
-    containerEl.append(`
-    <div class = "row" data-state=${hour}> 
-    <div class="col-12 col-md-2 btn btn-block p-3 my-2 btn-success" data-state=${hour}>${hour}</div>
-    <textarea id="appt" class= "col-12 col-md-8 btn btn-block p-3 my-2 btn-danger" data-state=${hour}></textarea>
-        <button type="button" id= "save" class= "col-12 col-md-2 btn btn-block p-3 my-2 btn-info" data-state=${hour}>💾</button>
-        </div>
-        `);
-    
+const hours = Array(9).fill().map((e, i) => {
+  const hour = i + 9;
+  if (hour > 12) {
+    return hour - 12 + "PM";
+  } else if (hour === 0) {
+    return 12 + "PM";
+  }
+  return hour + "AM";
 });
 
+$(document).ready(function() {
+  const localStorageAppointments = localStorage.getItem("appointments");
+  populateAppointments(localStorageAppointments);
 
-let apptEl = localStorage.getItem("appt");
-let saveEl =$('#save');
-//save button
-// saveEl.on('click', saveAppt);
-for(let i=0; i <hours.length;i++){
-    saveEl[i].on('click', saveAppt);
+
+  $('form').submit(function(event) {
+    event.preventDefault();
+    const data = $('form').serializeArray();
+
+    const localStorageAppointments = localStorage.getItem("appointments");
+    const appointments = {};
+
+    data.forEach(appointment => {
+      console.log(appointment);
+      console.log(appointments);
+      console.log(appointment.name);
+      appointments[appointment.name] = appointment.value;
+    });
+
+    console.log(appointments);
+    localStorage.setItem("appointments", JSON.stringify(appointments));
+
+    localStorage.setItem("appt", data);
+  });
+});
+
+const populateAppointments = (appointments) => {
+  if (!appointments) {
+    hours.forEach(hour => populateForm(hour, ""));
+    return;
+  }
+  const appointmentHours = JSON.parse(appointments);
+
+  Object.keys(appointmentHours).forEach(appt => {
+    populateForm(appt, appointmentHours[appt]);
+  })
 }
 
-function saveAppt(event){
-    event.preventDefault();
-    let apptEl =$('#appt');
-    console.log(apptEl.val());
-    localStorage.setItem("appt", apptEl.val());
-    for(let i=0; i <hours.length;i++){
+const populateForm = (hour, value) => {
+  const form = `
+  
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+     <h5> <span class="badge badge-danger m-3 p-1">${hour}</span></h5>
+ 
+      <input type="text" name=${hour} value= "${value}" class="form-control pd-3 m-1">
+    <button class= "btn btn-info" type="submit"><i class="bi bi-save"></i></button>
+  </li>
+    `;
+        
+  const form2 = `
+ <div class="form-group form-group-justified">
+  <div class="input-group input-group-lg  input-group-block p-3">
+  <span class="input-group-text md-3 p-3" name=${hour}>${hour}</span>
+  <input type="text" name=${hour} value= "${value}" class="form-control p-3 md-3">
 
-        if(hours[i]== event.target.getAttribute("data-state")){
-            console.log('it is equal')
-            localStorage.setItem(appt[i], apptEl.val())
-        }};
-};
+  <button class= "btn btn-info" type="submit">💾</button>
+  </div>
+  </div>
+  `;
 
+  containerEl.append(form);
+
+}
+
+$('form').submit(function(event) {
+  event.preventDefault();
+  const data = $('form').serializeArray();
+
+  const localStorageAppointments = localStorage.getItem("appointments");
+  const appointments = {};
+
+  data.forEach(appointment => {
+
+    appointments[appointment.name] = appointment.value;
+  });
+
+  localStorage.setItem("appointments", JSON.stringify(appointments));
+
+  localStorage.setItem("appt", data);
+});

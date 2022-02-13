@@ -1,16 +1,37 @@
 let containerEl = $('.appointments');
 let rowEl = $('.row');
 let hoursEl = $('#hours');
+let timeEl = $('#time');
 
-const hours = Array(9).fill().map((e, i) => {
-  const hour = i + 9;
-  if (hour > 12) {
-    return hour - 12 + "PM";
-  } else if (hour === 0) {
-    return 12 + "PM";
-  }
-  return hour + "AM";
-});
+function showTime(){
+  timeEl.text(moment().format('MMMM Do YYYY, h:mm:ss a'));
+}
+showTime();
+
+
+// const hours = Array(9).fill().map((e, i) => {
+//   const hour = i + 9;
+//   // console.log(hour);
+//   if (hour > 12) {
+//     return hour - 12 + "PM";
+//   } else if (hour == 12) {
+//     return hour + "PM";
+//   }
+//   return hour + "AM";
+// }
+// );
+
+const hours = [
+  '9AM',
+  '10AM',
+  '11AM',
+  '12PM',
+  '1PM',
+  '2PM',
+  '3PM',
+  '4PM',
+  '5PM'
+]
 
 $(document).ready(function() {
   const localStorageAppointments = localStorage.getItem("appointments");
@@ -25,8 +46,8 @@ $(document).ready(function() {
     const appointments = {};
 
     data.forEach(appointment => {
-      console.log(appointment);
-      console.log(appointments);
+      // console.log(appointment);
+      // console.log(appointments);
       console.log(appointment.name);
       appointments[appointment.name] = appointment.value;
     });
@@ -56,24 +77,13 @@ const populateForm = (hour, value) => {
       <li class="list-group-item d-flex justify-content-between align-items-center">
      <h5> <span class="badge badge-danger m-3 p-1">${hour}</span></h5>
  
-      <input type="text" name=${hour} value= "${value}" class="form-control pd-3 m-1">
+      <input type="text" name=${hour} value= "${value}" class="form-control pd-3 m-1" id="hour">
     <button class= "btn btn-info" type="submit"><i class="bi bi-save"></i></button>
   </li>
     `;
-        
-  const form2 = `
- <div class="form-group form-group-justified">
-  <div class="input-group input-group-lg  input-group-block p-3">
-  <span class="input-group-text md-3 p-3" name=${hour}>${hour}</span>
-  <input type="text" name=${hour} value= "${value}" class="form-control p-3 md-3">
-
-  <button class= "btn btn-info" type="submit">💾</button>
-  </div>
-  </div>
-  `;
-
+   
   containerEl.append(form);
-
+  pastPresent();
 }
 
 $('form').submit(function(event) {
@@ -92,3 +102,23 @@ $('form').submit(function(event) {
 
   localStorage.setItem("appt", data);
 });
+
+var currentHour = (moment().format("ha")).toUpperCase();
+// console.log(currentHour);
+
+function pastPresent(){
+hours.forEach(hour => {
+  // console.log(hour);
+  if(hour < currentHour){
+    $('#hour').addClass('future');
+    console.log(hour);
+    console.log(currentHour);
+  }; 
+  if (hour === currentHour){
+    $('#hour').addClass('present')
+  } ;
+  if (hour > currentHour){
+    $('#hour').addClass('past')
+  };
+});
+};

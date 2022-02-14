@@ -99,15 +99,22 @@ var currentHour = (moment().format("ha")).toUpperCase();
 function pastPresent(){
 hours.forEach(hour => {
   // console.log(hour);
+  var blockTime = parseInt($(this).attr("id").split("hour")[1]);
   if(hour > currentHour){
     $('li').addClass('future');
+    $('li').removeClass('past');
+    $('li').removeClass('present');
     console.log(hour > currentHour)
   }
   else if (hour === currentHour){
-    $('li').addClass('present')
+    $('li').addClass('present');
+    $('li').removeClass('future');
+    $('li').removeClass('past');
   } 
   else {
-    $('li').addClass('past')
+    $('li').addClass('past');
+    $('li').removeClass('future');
+    $('li').removeClass('present');
   }
 });
 };

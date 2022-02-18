@@ -95,7 +95,12 @@ $('form').submit(function(event) {
 
 var currentHour = (moment().format("ha")).toUpperCase();
 // console.log(currentHour);
-
+hoursEl.forEach(hour => {
+  let i = 9;
+  hour.attr('id', i);
+  i ++;
+  console.log(hour)
+})
 function pastPresent(){
 hours.forEach(hour => {
   // console.log(hour);

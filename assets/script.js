@@ -21,7 +21,7 @@ const hours = Array(9).fill().map((e, i) => {
 }
 );
 
-
+// hours += save + plans
 
 $(document).ready(function() {
   const localStorageAppointments = localStorage.getItem("appointments");
@@ -123,5 +123,7 @@ hours.forEach(hour => {
   }
 });
 };
+
+populateForm();
 
 

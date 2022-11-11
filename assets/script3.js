@@ -37,16 +37,13 @@ let reminderEl = $('input');
 let buttonEl = $('button');
 
 $.each(reminderEl, (i, reminder) => {
-  if (reminder.dataset.num < hour.format('HH')) {
+  if (parseInt(reminder.dataset.num) < hour.format('HH')) {
       // debugger;
     console.log('here we gooo...');
     // debugger;
     $(reminder).attr('disabled','disabled');
   }
 })
-if(reminderEl[0].dataset.num < hour.format('HH')){
-  $(reminderEl[0]).attr('disabled','disabled');
-}
 
 
 reminderEl.on('click', event => {

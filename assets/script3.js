@@ -9,19 +9,23 @@ $.each(hours, function(i, hour){
   // debugger;
   if(hourText.attr('data-num') < 12){
   // hour, schedule, and save button appending to the row for each hour
-  rowEl.append(`
+  containerEl.append(`
+  <div class="row" id="row">
     <div class="col-12 col-md-2 col-sm-2 btn btn-block p-3 my-2 btn-success" style="padding:0px" data-num=${hourText.attr('data-num')}>${hour + "am"}</div> 
     <input type="text" class="col-12 col-md-8 col-sm-8 btn btn-block p-3 my-2 btn-danger" style="padding:0px" id="reminder${hourText.attr('data-num')}">
     </input>
-    <div class="col-12 col-md-2 col-sm-2 btn btn-block p-3 my-2 btn-info" style="padding:0px" id="save${hourText.attr('data-num')}">💾
-    </div> `);
+    <button type='button' class="col-12 col-md-2 col-sm-2 btn btn-block p-3 my-2 btn-info" style="padding:0px" id="save${hourText.attr('data-num')}">💾
+    </button> 
+  </div>`);
   } else {
-    rowEl.append(`
+    containerEl.append(`
+    <div class ='row' id='row'>
     <div class="col-12 col-md-2 col-sm-2 btn btn-block p-3 my-2 btn-success" style="padding:0px" data-num=${hourText.attr('data-num')}>${hour + "pm"}
     </div>
     <input type="text" class="col-12 col-md-8 col-sm-8 btn btn-block p-3 my-2 btn-danger" style="padding:0px" id="reminder${hourText.attr('data-num')}">
     </input>
-    <div class="col-12 col-md-2 col-sm-2 btn btn-block p-3 my-2 btn-info" style="padding:0px" id="save${hourText.attr('data-num')}">💾
-    </div> `);
+    <button type='button' class="col-12 col-md-2 col-sm-2 btn btn-block p-3 my-2 btn-info" style="padding:0px" id="save${hourText.attr('data-num')}">💾
+    </button> 
+    </div>`);
   }
 })

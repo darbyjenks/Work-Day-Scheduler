@@ -60,12 +60,12 @@ saveButton.on("click", function(event) {
   });
 
    //clears local storage at each end of day
-  const getDate = () => moment().format("MMM Do YY");
-  let pageLoadDate = getDate();
+  // const getDate = () => moment().format("MMM Do YY");
+  // let pageLoadDate = getDate();
 
-  if(pageLoadDate!== getDate()){
-    localStorage.clear();
-  }
+  // if(pageLoadDate!== getDate()){
+  //   localStorage.clear();
+  // }
   // $.each(reminderEl, (i, reminder) => {
   //   if(reminder.dataset.date == getDate()){
   //     localStorage.clear();

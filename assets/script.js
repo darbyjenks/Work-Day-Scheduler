@@ -14,7 +14,7 @@ $.each(hours, function(i, hour){
   containerEl.append(`
   <div class="row" id="row" width="100%">
     <div class="col-2 col-md-2 col-sm-2 btn btn-block p-3 my-2 btn-success " id='hour' style="padding:0px" data-num=${hourText.attr('data-num')}>${hour + "am"}</div> 
-    <input type="text" class="col-8 col-md-8 col-sm-8 btn btn-block p-3 my-2 btn-danger " style="padding:0px" data-num=${hourText.attr('data-num')} id="reminder${hourText.attr('data-num')}">
+    <input type="text" class="col-8 col-md-8 col-sm-8 btn btn-block p-3 my-2 btn-danger " style="padding:0px; color:white" data-num=${hourText.attr('data-num')} id="reminder${hourText.attr('data-num')}">
     </input>
     <button type='button' class="col-2 col-md-2 col-sm-2 btn btn-block p-3 my-2 btn-info " style="padding:0px" data-num=${hourText.attr('data-num')} id="save${hourText.attr('data-num')}">💾
     </button> 
@@ -24,7 +24,7 @@ $.each(hours, function(i, hour){
     <div class ='row stay-inline' id='row'>
     <div class="col-2 col-md-2 col-sm-2 btn btn-block p-3 my-2 btn-success " id='hour' style="padding:0px" data-num=${hourText.attr('data-num')}>${hour + "pm"}
     </div>
-    <input type="text" class="col-8 col-md-8 col-sm-8 btn btn-block p-3 my-2 btn-danger " style="padding:0px" data-num=${hourText.attr('data-num')} id="reminder${hourText.attr('data-num')}">
+    <input type="text" class="col-8 col-md-8 col-sm-8 btn btn-block p-3 my-2 btn-danger " style="padding:0px; color:white" data-num=${hourText.attr('data-num')} id="reminder${hourText.attr('data-num')}">
     </input>
     <button type='button' class="col-2 col-md-2 col-sm-2 btn btn-block p-3 my-2 btn-info " style="padding:0px" data-num=${hourText.attr('data-num')} id="save${hourText.attr('data-num')}">💾
     </button> 

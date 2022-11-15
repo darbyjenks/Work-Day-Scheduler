@@ -12,21 +12,21 @@ $.each(hours, function(i, hour){
   if(hourText.attr('data-num') < 12){
   // hour, schedule, and save button appending to the row for each hour
   containerEl.append(`
-  <div class="row" id="row">
-    <div class="col-12 col-md-2 col-sm-2 btn btn-block p-3 my-2 btn-success" id='hour' style="padding:0px" data-num=${hourText.attr('data-num')}>${hour + "am"}</div> 
-    <input type="text" class="col-12 col-md-8 col-sm-8 btn btn-block p-3 my-2 btn-danger" style="padding:0px" data-num=${hourText.attr('data-num')} id="reminder${hourText.attr('data-num')}">
+  <div class="row" id="row" width="100%">
+    <div class="col-2 col-md-2 col-sm-2 btn btn-block p-3 my-2 btn-success " id='hour' style="padding:0px" data-num=${hourText.attr('data-num')}>${hour + "am"}</div> 
+    <input type="text" class="col-8 col-md-8 col-sm-8 btn btn-block p-3 my-2 btn-danger " style="padding:0px" data-num=${hourText.attr('data-num')} id="reminder${hourText.attr('data-num')}">
     </input>
-    <button type='button' class="col-12 col-md-2 col-sm-2 btn btn-block p-3 my-2 btn-info" style="padding:0px" data-num=${hourText.attr('data-num')} id="save${hourText.attr('data-num')}">💾
+    <button type='button' class="col-2 col-md-2 col-sm-2 btn btn-block p-3 my-2 btn-info " style="padding:0px" data-num=${hourText.attr('data-num')} id="save${hourText.attr('data-num')}">💾
     </button> 
   </div>`);
   } else {
     containerEl.append(`
-    <div class ='row' id='row'>
-    <div class="col-12 col-md-2 col-sm-2 btn btn-block p-3 my-2 btn-success" id='hour' style="padding:0px" data-num=${hourText.attr('data-num')}>${hour + "pm"}
+    <div class ='row stay-inline' id='row'>
+    <div class="col-2 col-md-2 col-sm-2 btn btn-block p-3 my-2 btn-success " id='hour' style="padding:0px" data-num=${hourText.attr('data-num')}>${hour + "pm"}
     </div>
-    <input type="text" class="col-12 col-md-8 col-sm-8 btn btn-block p-3 my-2 btn-danger" style="padding:0px" data-num=${hourText.attr('data-num')} id="reminder${hourText.attr('data-num')}">
+    <input type="text" class="col-8 col-md-8 col-sm-8 btn btn-block p-3 my-2 btn-danger " style="padding:0px" data-num=${hourText.attr('data-num')} id="reminder${hourText.attr('data-num')}">
     </input>
-    <button type='button' class="col-12 col-md-2 col-sm-2 btn btn-block p-3 my-2 btn-info" style="padding:0px" data-num=${hourText.attr('data-num')} id="save${hourText.attr('data-num')}">💾
+    <button type='button' class="col-2 col-md-2 col-sm-2 btn btn-block p-3 my-2 btn-info " style="padding:0px" data-num=${hourText.attr('data-num')} id="save${hourText.attr('data-num')}">💾
     </button> 
     </div>`);
   }
@@ -47,7 +47,6 @@ $.each(reminderEl, (i, reminder) => {
 //save reminder into local storage as the dataset number
 saveButton.on("click", function(event) {
   event.preventDefault();
-  console.log('clicked the save.. ')
   $.each(reminderEl, (i, reminder) => {
     $.each(saveButton, (i, saveBtn) => {
       let saveNo = event.target.dataset.num;
@@ -69,7 +68,6 @@ saveButton.on("click", function(event) {
 
   //retrieves localStorage appointment data
   for(i = 0; i < reminderEl.length; i++){
-    console.log('hiii')
     let appointment = localStorage.getItem((reminderEl[i].dataset.num));
     reminderEl[i].value = appointment;
   }
